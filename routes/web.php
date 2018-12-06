@@ -11,6 +11,16 @@
 |
 */
 
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource('election_types','ElectionTypesController');
+Route::resource('parties','PartiesController');
+Route::resource('areas','AreasController');
+Route::resource('candidates','CandidatesController');
+Route::resource('elections','ElectionsController');
