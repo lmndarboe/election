@@ -103,30 +103,20 @@
                 <!-- /row -->
                 
                 <div class="row">
-                        {{-- <div class="col-md-12">
-                                <div class="form-group{{ $errors->has('logo') ? 'has-error' : '' }}">
-                                    <label for="flag_bearer">Party Logo</label>
-                                    <input type="file" class="form-control" name="logo" id="logo" value="{{ old('logo') }}" style="width: 100%;" required>
-                                    @if ($errors->has('logo'))
-                                        <span>
-                                            <strong>{{ $errors->first('logo')}}</strong>
-                                        </span>
-                                    @endif 
-                                </div>
-                            </div>
-                            <!-- /col 6 --> --}}
+                        
+                        <div class="col-md-12">
 
-                            <div class="row clearfix">
-                                    <div class="input-group{{ $errors->has('file') ? ' has-error' : '' }}">
-                                        
-                                            <label for="">Upload Picture</label>
-                                            <input class="form-control date" name="file" type="file" id="file" value="{{ old('file') }}" required>
-                                            @if ($errors->has('file'))
-                                                <strong class="text-danger">{{ $errors->first('file') }}</strong>
-                                            @endif
-                                        
-                                    </div>
-                                </div>
+                                
+                                        <div class="form-group{{ $errors->has('flag_bearer') ? 'has-error' : '' }}">
+                                                <label for="">Upload Picture</label>
+                                                <input class="form-control date" name="file" type="file" id="file" value="{{ old('file') }}" required>
+                                                @if ($errors->has('file'))
+                                                    <strong class="text-danger">{{ $errors->first('file') }}</strong>
+                                                @endif
+                                        </div>
+                                    
+
+                        </div>
                                 <!-- /row -->
                 </div>
                 <!-- /row -->
