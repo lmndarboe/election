@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Party;
 
 class PartiesController extends Controller
 {
@@ -13,7 +15,8 @@ class PartiesController extends Controller
      */
     public function index()
     {
-        //
+        $parties = Party::all();
+        return view('parties.index',compact('parties'));
     }
 
     /**
@@ -23,7 +26,7 @@ class PartiesController extends Controller
      */
     public function create()
     {
-        //
+        return view('parties.create');
     }
 
     /**
@@ -35,6 +38,44 @@ class PartiesController extends Controller
     public function store(Request $request)
     {
         //
+
+        
+
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'flag_bearer' => 'required|string|max:255',
+            'flag_color' => 'required|string|max:255',
+            //'file' => 'required',
+        ]);
+        
+       
+       // dd($request);
+    
+
+        $file = str_random(20);
+
+        //dd(base64_encode($request['file']));
+
+         Storage::put(
+        //     'images/'.$file,
+        //     'data:image/jpeg;base64'.base64_encode(file_get_contents($request['file'[))
+            'images/'.$file,
+            'data:image/jpeg;base64'.base64_encode($request['file'])
+         );
+        
+        Party::create([
+            'name' => $request['name'],
+            'address' => $request['address'],
+            'flag_bearer' => $request['flag_bearer'],
+            'flag_color' => $request['flag_color'],
+            'logo' => 'images/'.$file,
+        ]);
+
+
+        return redirect(route('parties.index'))->with(
+            'status', 'Party Photo Successfully Uploaded!'
+        );
     }
 
     /**

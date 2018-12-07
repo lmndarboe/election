@@ -19,7 +19,7 @@ class CreatePartiesTable extends Migration
             $table->text('address');
             $table->string('flag_bearer');
             $table->string('flag_color');
-            $table->string('logo');
+            $table->longText('logo')->nullable();
             $table->timestamps();
         });
     }

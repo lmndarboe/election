@@ -5,7 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
-{
+{   
+    protected $fillable = [
+        'name','type'
+    ];
     public function votings(){
     	return $this->hasMany(Voting::class);
     }

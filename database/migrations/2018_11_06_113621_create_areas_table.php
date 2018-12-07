@@ -17,7 +17,7 @@ class CreateAreasTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->enum('type',['Country','Region','Constituency','Wards']);
-            $table->integer('parent_id');   
+            $table->integer('parent_id')->nullable();   
             $table->timestamps();
         });
     }

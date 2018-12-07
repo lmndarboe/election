@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Area;
 
 class AreasController extends Controller
 {
@@ -13,7 +14,8 @@ class AreasController extends Controller
      */
     public function index()
     {
-        //
+        $areas = Area::all();
+        return view('areas.index',compact('areas'));
     }
 
     /**
@@ -23,7 +25,7 @@ class AreasController extends Controller
      */
     public function create()
     {
-        //
+        return view('areas.create');
     }
 
     /**
@@ -34,7 +36,17 @@ class AreasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'type' => 'required|string'
+        ]);
+        
+        Area::create([
+            'name' => $request['name'],
+            'type' => $request['type']
+        ]);
+
+        return redirect()->route('areas.index')->with('success', 'Area Save Successfully');
     }
 
     /**
@@ -54,9 +66,9 @@ class AreasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Area $area)
     {
-        //
+        return view('areas.edit',compact('area'));
     }
 
     /**
@@ -66,9 +78,15 @@ class AreasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Area $area)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'type' => 'required|string'
+        ]);
+        $area->update($request->all());
+
+        return redirect()->route('areas.index')->with('success', 'Area Updated Successfully');
     }
 
     /**
@@ -77,8 +95,10 @@ class AreasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Area $area)
     {
-        //
+        $area->delete();
+        return 'Area Deleted Successfully';
+        //return redirect()->route('areas.index')->with('success', 'Area Save Successfully');
     }
 }
