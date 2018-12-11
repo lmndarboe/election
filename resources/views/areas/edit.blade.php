@@ -75,7 +75,7 @@
                 <!-- /row -->
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary pull-right">Update</button>
-                    <button type="submit" class="btn btn-danger">Cancel</button>
+                    <a href="{{route('areas.index')}}" class="btn btn-danger">Cancel</a>
                   </div>
             </form>
             <!-- /form -->

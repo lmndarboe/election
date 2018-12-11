@@ -19,8 +19,8 @@ class CreateElectionsTable extends Migration
             $table->foreign('election_type_id')->references('id')->on('election_types');
             $table->year('year');
             $table->date('date');
-            $table->timestamp('start_time')->nullable();
-            $table->timestamp('end_time')->nullable();
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
             $table->timestamps();
         });
     }

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Election extends Model
 {
+
+    protected $fillable = [
+        'election_type_id','year','date','start_time','end_time'
+    ];
     
     public function votings(){
     	return $this->hasMany(Voting::class);

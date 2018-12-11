@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Election;
+use App\ElectionType;
 
 class ElectionsController extends Controller
 {
@@ -13,7 +15,8 @@ class ElectionsController extends Controller
      */
     public function index()
     {
-        //
+        $elections = Election::all();
+        return view('elections.index',compact('elections'));
     }
 
     /**
@@ -22,8 +25,9 @@ class ElectionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $elections_types = ElectionType::all();
+        return view('elections.create',compact('elections_types'));
     }
 
     /**
@@ -33,8 +37,28 @@ class ElectionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+
+        //dd($request);
+        $this->validate($request,[
+            'election_type_id' => 'required',
+            'year' => 'required|numeric',
+            'date' => 'required|date',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+
+        Election::create([
+            'election_type_id' => $request['election_type_id'],
+            'year' => $request['year'],
+            'date' => $request['date'],
+            'start_time' => $request['start_time'],
+            'end_time' => $request['end_time'],
+        ]);
+
+        return redirect(route('elections.index'))->with(
+            'status', 'Election Created Successfully'
+        );
     }
 
     /**
@@ -54,9 +78,10 @@ class ElectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Election $election)
+    {   
+        $elections_types = ElectionType::all();
+        return view('elections.edit',compact('election','elections_types'));
     }
 
     /**
@@ -66,9 +91,21 @@ class ElectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Election $election)
     {
-        //
+        $this->validate($request,[
+            'election_type_id' => 'required',
+            'year' => 'required|numeric',
+            'date' => 'required|date',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+
+        $election->update($request->all());
+
+        return redirect(route('elections.index'))->with(
+            'status', 'Election Updated Successfully'
+        );
     }
 
     /**
@@ -77,8 +114,15 @@ class ElectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Election $election)
+    {   
+        try {
+        
+            $election->delete();
+            return 'Election deleted successfully';
+        } catch (\Exception $e) {
+            return 'Error deleting Election ';
+            
+        }
     }
 }

@@ -95,9 +95,9 @@ class PartiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Party $party)
     {
-        //
+        return view('parties.edit',compact('party'));
     }
 
     /**
@@ -107,9 +107,19 @@ class PartiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Party $party)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'flag_bearer' => 'required|string|max:255',
+            'flag_color' => 'required|string|max:255',
+        ]);
+        $party->update($request->all());
+
+        return redirect(route('parties.index'))->with(
+            'status', 'Party Updated Successfully'
+        );
     }
 
     /**
@@ -118,8 +128,10 @@ class PartiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Party $party)
     {
-        //
+        $party->delete();
+
+        return 'Party deleted successfully';
     }
 }

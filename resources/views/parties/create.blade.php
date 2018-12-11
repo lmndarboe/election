@@ -122,7 +122,7 @@
                 <!-- /row -->
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary pull-right">Save</button>
-                    <button type="submit" class="btn btn-danger">Cancel</button>
+                    <a href="{{route('parties.index')}}" class="btn btn-danger">Cancel</a>
                   </div>
             </form>
             <!-- /form -->

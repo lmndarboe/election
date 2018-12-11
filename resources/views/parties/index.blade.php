@@ -29,7 +29,7 @@
     	
     	<div class="box">
             <div class="box-header">
-              <h3 class="box-title">Paties</h3>
+              <h3 class="box-title">Parties</h3>
 
             <a class="btn btn-success pull-right" href="{{route('parties.create')}}">New Party</a>
 
@@ -58,8 +58,9 @@
                   <td class="text-right" align="right">
                   
                   	<div class="btn-group">
-                        {{-- <a href="/areas/{{$area->id }}" class="btn btn-danger delete-record"><i class="fa fa-trash"></i></a> --}}
-                        {{-- <a href="/areas/{{$area->id }}/edit" class="btn btn-default"><i class="fa fa-edit"></i></a> --}}
+                        <a href="/parties/{{$party->id }}" class="btn btn-danger delete-record"><i class="fa fa-trash"></i></a>
+                         <a href="/parties/{{$party->id }}/edit" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                  	</div>     
                   	
                   </td>
                 </tr>

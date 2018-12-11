@@ -21,6 +21,6 @@ class Party extends Model
     public function image()
     {
         //$this->logo;
-        return $this->logo == null ? asset('img/face.png') : Storage::get('/storage/app/images'.$this->logo);
+        return $this->logo == null ? asset('img/face.png') : Storage::get($this->logo);
     }
 }
