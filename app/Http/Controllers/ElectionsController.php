@@ -115,7 +115,7 @@ class ElectionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Election $election)
-    {   
+    {      
         try {
         
             $election->delete();

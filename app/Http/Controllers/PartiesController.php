@@ -131,7 +131,6 @@ class PartiesController extends Controller
     public function destroy(Party $party)
     {
         $party->delete();
-
         return 'Party deleted successfully';
     }
 }

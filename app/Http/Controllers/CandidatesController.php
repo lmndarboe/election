@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Candidate;
+use App\Party;
 class CandidatesController extends Controller
 {
     /**
@@ -13,7 +14,8 @@ class CandidatesController extends Controller
      */
     public function index()
     {
-        //
+        $candidates = Candidate::all();
+        return view('candidates.index',compact('candidates'));
     }
 
     /**
@@ -22,8 +24,9 @@ class CandidatesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $parties = Party::all();
+        return view('candidates.create',compact('parties'));
     }
 
     /**
@@ -34,7 +37,20 @@ class CandidatesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'full_name' => 'required|string|max:255',
+            'party_id' => 'required',
+            'address' => 'required',
+        ]);
+        Candidate::create([
+            'full_name' => $request['full_name'],
+            'party_id' => $request['party_id'],
+            'address' => $request['address'],
+        ]);
+
+        return redirect(route('candidates.index'))->with(
+            'status', 'Candidate Created Successfully'
+        );
     }
 
     /**
@@ -54,9 +70,10 @@ class CandidatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Candidate $candidate)
+    {   
+        $parties = Party::all();
+        return view('candidates.edit',compact('candidate','parties'));
     }
 
     /**
@@ -66,9 +83,18 @@ class CandidatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Candidate $candidate)
     {
-        //
+        $this->validate($request,[
+            'full_name' => 'required|string|max:255',
+            'party_id' => 'required',
+            'address' => 'required',
+        ]);
+        $candidate->update($request->all());
+
+        return redirect(route('candidates.index'))->with(
+            'status', 'Candidate Updated Successfully'
+        );
     }
 
     /**
@@ -77,8 +103,9 @@ class CandidatesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Candidate $candidate)
     {
-        //
+        $candidate->delete();
+        return 'Candidate Deleted Successfully';
     }
 }
