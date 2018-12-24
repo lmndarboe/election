@@ -157,14 +157,14 @@
             })
             //Timepicker
             $('.timepicker').timepicker({
-                timeFormat: 'HH:mm:ss',
-                showInputs: true
+                timeFormat: 'h:i:s',
+                showInputs: false
             })
 
             //Timepicker
             $('.timepicker1').timepicker({
-                timeFormat: 'HH:mm:ss',
-                showInputs: true
+                timeFormat: 'h:i:s',
+                showInputs: false
             })
         })
       </script>

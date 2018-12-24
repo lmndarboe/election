@@ -54,7 +54,10 @@
                 <td>{{ $party->address }}</td>
                 <td>{{ $party->flag_bearer}}</td>
                 <td>{{ $party->flag_color }}</td>
-                <td>{{ $party->image() }}</td>
+                <td>
+                <img style="width: 30px;" src="/{{ $party->logo }}">
+                
+                </td>
                   <td class="text-right" align="right">
                   
                   	<div class="btn-group">

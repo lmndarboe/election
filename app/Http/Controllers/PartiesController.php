@@ -52,24 +52,35 @@ class PartiesController extends Controller
        
        // dd($request);
     
+        $image_path = '';
+        if(request()->hasFile('file')){
+            $file = request()->file('file');
+            $filename = str_random(20).'.'.$file->getClientOriginalExtension();
+            $image_path = 'images/'.$filename;
+            $file->move(public_path().'/images/',$filename);
 
-        $file = str_random(20);
+        }
+
+        // return $image_path;
+
+
+        // $file = str_random(20);
 
         //dd(base64_encode($request['file']));
 
-         Storage::put(
+        //  Storage::put(
+        // //     'images/'.$file,
+        // //     'data:image/jpeg;base64'.base64_encode(file_get_contents($request['file'[))
         //     'images/'.$file,
-        //     'data:image/jpeg;base64'.base64_encode(file_get_contents($request['file'[))
-            'images/'.$file,
-            'data:image/jpeg;base64'.base64_encode($request['file'])
-         );
+        //     'data:image/jpeg;base64'.base64_encode($request['file'])
+        //  );
         
         Party::create([
             'name' => $request['name'],
             'address' => $request['address'],
             'flag_bearer' => $request['flag_bearer'],
             'flag_color' => $request['flag_color'],
-            'logo' => 'images/'.$file,
+            'logo' => $image_path,
         ]);
 
 

@@ -38,7 +38,8 @@
             <div class="box-body">
 
             
-        <form action="{{route('parties.store')}}" method="POST">
+        <!-- <form action="{{route('parties.store')}}" method="POST"> -->
+         {!! Form::open(['url' => '/parties/','class' => '','method' => 'POST','files' => true])  !!} 
             {{ csrf_field() }}
 
                 <div class="row">

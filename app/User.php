@@ -32,8 +32,8 @@ class User extends Authenticatable
         return $this->belongsTo(Group::class);
     }
 
-    public function voter_cards(){
-        return $this->hasMany(VoterCard::class);
+    public function voter_card(){
+        return $this->hasOne(VoterCard::class);
     }
 
     public function isAdmin(){
