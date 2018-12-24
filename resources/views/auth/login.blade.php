@@ -28,58 +28,147 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="/index2.html"><b>Admin</b></a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+  <br><br>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
 
-      <p style="color: red;">
-       @if ($errors->has('email'))
-       <span class="help-block" style="color: red;">
-        <strong>{{ $errors->first('email') }}</strong>
-      </span>
-      @endif
-    </p>
+        <li class="active"><a href="#voter" data-toggle="tab">Voter Login</a></li>
+        <li ><a href="#admin" data-toggle="tab">Admin Login</a></li>
 
-    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-      {{ csrf_field() }}
+      </ul>
+      <div class="tab-content">
+        <div class=" tab-pane" id="admin">
+          <!-- Post -->
 
-      <div class="form-group has-feedback">
-        <input type="email"  id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" id="password" type="password" class="form-control" name="password" required placeholder="Password">
 
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
+
+          <div class="login-box">
+            <div class="login-logo">
+              <a href="/index2.html"><b>Admin</b></a>
+            </div>
+            <!-- /.login-logo -->
+            <div class="login-box-body">
+              <p class="login-box-msg">Sign in to start your session</p>
+
+              <p style="color: red;">
+               @if ($errors->has('email'))
+               <span class="help-block" style="color: red;">
+                <strong>{{ $errors->first('email') }}</strong>
+              </span>
+              @endif
+            </p>
+
+            <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+              {{ csrf_field() }}
+
+              <div class="form-group has-feedback">
+                <input type="email"  id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <input type="password" id="password" type="password" class="form-control" name="password" required placeholder="Password">
+
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="checkbox icheck">
+                    <label>
+                      <input type="checkbox"> Remember Me
+                    </label>
+                  </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                  <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+
+
+            <!-- /.social-auth-links -->
+
+            <a href="#">I forgot my password</a><br>
+            <!-- <a href="/voter-login" class="text-center">Login as Voter</a> -->
+
           </div>
+          <!-- /.login-box-body -->
         </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-        </div>
-        <!-- /.col -->
+
+        <!-- /.post -->
+
+
       </div>
-    </form>
+      <!-- /.tab-pane -->
+      <div class="active tab-pane" id="voter">
 
 
-    <!-- /.social-auth-links -->
 
-    <a href="#">I forgot my password</a><br>
-    <a href="/voter-login" class="text-center">Login as Voter</a>
+        <div class="login-box">
+          <div class="login-logo">
+            <a href="#"><b>Voter</b></a>
+          </div>
+          <!-- /.login-logo -->
+          <div class="login-box-body">
+          <p class="login-box-msg">Sign in to start your voting</p>
+
+            <p style="color: red;">
+             @if (session()->has('error'))
+             <span class="help-block" style="color: red;">
+              <strong>{{ session()->get('error') }}</strong>
+            </span>
+            @endif
+          </p>
+
+          <form class="form-horizontal" method="POST" action="/voter-login">
+            {{ csrf_field() }}
+
+            <div class="form-group has-feedback">
+              <input  id="card_number" class="form-control" name="card_number" value="{{ old('card_number') }}" required autofocus placeholder="Card Number">
+              <span class="fa fa-credit-card form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+              <input  id="pin" type="password" class="form-control" name="pin" required placeholder="Pin">
+
+              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+              <div class="col-xs-8">
+                <div class="checkbox icheck">
+                  <label>
+                    <input type="checkbox"> Remember Me
+                  </label>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-xs-4">
+
+
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+
+
+          <!-- /.social-auth-links -->
+
+          <a href="#">I forgot my pin</a><br>
+          <!-- <a href="/voter-login" class="text-center">Login as Voter</a> -->
+
+        </div>
+        <!-- /.login-box-body -->
+      </div>
+
+    </div>
+    <!-- /.tab-pane -->
 
   </div>
-  <!-- /.login-box-body -->
+  <!-- /.tab-content -->
+</div>
+<!-- /.nav-tabs-custom -->
 </div>
 <!-- /.login-box -->
 

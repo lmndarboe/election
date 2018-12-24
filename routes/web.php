@@ -47,7 +47,21 @@ Route::get('/voter-login',function(){
 });
 
 Route::post('/voter-login',function(){
-	return request()->all();
+	$card_number = request()->get('card_number');
+	$pin = request()->get('pin');
+
+	$voter_card = \App\VoterCard::where('card_number',$card_number)->first();
+	if(is_null($voter_card)) return redirect()->back()->with('error','Card number does not exist');	
+
+	$voter_card = \App\VoterCard::where('card_number',$card_number)
+				->where('pin',$pin)->first();
+
+	if(is_null($voter_card)) return redirect()->back()->with('error','Card Number/PIN Combinationis wrong');	
+	// return $voter_card->user;;
+
+	auth()->loginUsingId($voter_card->user_id);
+
+	return redirect('/');
 });
 
 

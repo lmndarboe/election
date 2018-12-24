@@ -43,10 +43,10 @@ class VoterCardsController extends Controller
 
         try {
             \DB::connection()->getPdo()->beginTransaction();
-
+            $voter_group = \App\Group::where('name','Voters')->first();
 
             $user = new \App\User;
-            $user->group_id = 2;
+            $user->group_id = $voter_group->id;;
             $user->name = request()->get('full_name');
             $user->email = request()->get('email');
             $user->password = \Hash::make('123');

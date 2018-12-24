@@ -21,6 +21,7 @@ class CreateElectionsTable extends Migration
             $table->date('date');
             $table->string('start_time')->nullable();
             $table->string('end_time')->nullable();
+            $table->enum('status',['IN-ACTIVE','ACTIVE']);
             $table->timestamps();
         });
     }
