@@ -11,6 +11,15 @@ class VoterCard extends Model
     	return $this->hasMany(Voting::class);
     }
 
+    public function area(){
+    	return $this->belongsTo(Area::class);
+    }
+
+
+    public function user(){
+    	return $this->belongsTo(User::class);
+    }
+
    
 
 }

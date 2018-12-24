@@ -32,4 +32,17 @@ class User extends Authenticatable
         return $this->belongsTo(Group::class);
     }
 
+    public function voter_cards(){
+        return $this->hasMany(VoterCard::class);
+    }
+
+    public function isAdmin(){
+        return $this->group->name == 'Administrators';
+    }
+
+
+    public function isVoter(){
+        return $this->group->name == 'Voters';
+    }
+
 }

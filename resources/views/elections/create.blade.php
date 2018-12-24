@@ -152,7 +152,7 @@
         $(function () {
          //Date picker
             $('.datepicker').datepicker({
-                format: 'yy-mm-dd',
+                format: 'yyyy-mm-dd',
                 autoclose: true
             })
             //Timepicker

@@ -15,8 +15,11 @@ class CreateVoterCardsTable extends Migration
     {
         Schema::create('voter_cards', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('card_number')->unique();
             $table->string('full_name');
+            $table->string('email')->unique()
             $table->date('dob');
             $table->string('address');
             $table->string('pin');

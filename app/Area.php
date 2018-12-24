@@ -16,4 +16,8 @@ class Area extends Model
     public function candidate_registrations(){
     	return $this->hasMany(CandidateRegistration::class);
     }
+
+    public function voter_cards(){
+    	return $this->hasMany(VoterCard::class);
+    }
 }

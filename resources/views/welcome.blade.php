@@ -2,5 +2,5 @@
 
 @section('content')
 
-    <h2>Hus</h2>
+    <h2>...</h2>
 @stop

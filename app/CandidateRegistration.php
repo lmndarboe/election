@@ -14,4 +14,8 @@ class CandidateRegistration extends Model
     	return $this->belongsTo(Candidate::class);
     }
 
+    public function election(){
+    	return $this->belongsTo(Election::class);
+    }
+
 }

@@ -11,11 +11,19 @@
 |
 */
 
-
+Route::group(['middleware' => 'auth'], function (){
 
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/voting',function(){
+	return view('welcome');
+});
+
+Route::get('voter-home',function(){
+	return view('welcome');
 });
 
 
@@ -24,3 +32,23 @@ Route::resource('parties','PartiesController');
 Route::resource('areas','AreasController');
 Route::resource('candidates','CandidatesController');
 Route::resource('elections','ElectionsController');
+Route::resource('candidate_registrations','CandidateRegistrationsController');
+Route::resource('voter_cards','VoterCardsController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+});
+
+Route::get('/voter-login',function(){
+	return view('auth.login_voters');
+});
+
+Route::post('/voter-login',function(){
+	return request()->all();
+});
+
+
+Auth::routes();
