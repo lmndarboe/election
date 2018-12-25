@@ -25,7 +25,9 @@ class AreasController extends Controller
      */
     public function create()
     {
-        return view('areas.create');
+        $areas = \App\Area::pluck('name','id');
+        $areas = ['NULL' => 'No Parent'] + $areas->all();
+        return view('areas.create',compact('areas'));
     }
 
     /**
@@ -40,10 +42,16 @@ class AreasController extends Controller
             'name' => 'required|string|max:255',
             'type' => 'required|string'
         ]);
+
+        $parent_id = request()->get('parent_id');
+        $parent_id = ($parent_id == 'NULL') ? null :  $parent_id;
+
+        // return $parent_id;
         
         Area::create([
             'name' => $request['name'],
-            'type' => $request['type']
+            'type' => $request['type'],
+            'parent_id' => $parent_id
         ]);
 
         return redirect()->route('areas.index')->with('success', 'Area Save Successfully');
@@ -84,7 +92,13 @@ class AreasController extends Controller
             'name' => 'required|string|max:255',
             'type' => 'required|string'
         ]);
-        $area->update($request->all());
+
+        $parent_id = request()->get('parent_id');
+        $parent_id = ($parent_id == 'NULL') ? null :  $parent_id;
+
+        $input = $request->all();
+        $input['parent_id'] = $parent_id;
+        $area->update($input);
 
         return redirect()->route('areas.index')->with('success', 'Area Updated Successfully');
     }

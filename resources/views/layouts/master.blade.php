@@ -143,16 +143,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
 
-        <li>
-          <a href="/">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">
-                <span class="fa fa-dashboard"></span>
-              </small>
-            </span>
-          </a>
-        </li>
+        @if(! auth()->user()->isAdmin())
 
         <li>
           <a href="/voting">
@@ -165,7 +156,24 @@
           </a>
         </li>
 
+        @endif
+
         @if(auth()->user()->isAdmin())
+
+        <li>
+          <a href="/">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">
+                <span class="fa fa-dashboard"></span>
+              </small>
+            </span>
+          </a>
+        </li>
+
+
+
+        
 
 
         <li>

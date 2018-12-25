@@ -57,10 +57,21 @@ Route::group(['middleware' => 'auth'], function (){
 
 
 		}
+
+		$election = \App\Election::where('status','ACTIVE')->first();
+
+		if(! is_null($election)){
+			$candidates = $election->candidate_registrations;
+			return  view('welcome',compact('candidates','election'));
+		}
+
+
 		return view('welcome');
 	});
 
 	Route::get('/voting',function(){
+
+		if( auth()->user()->isAdmin()) return redirect()->back();
 
 		$election = \App\Election::where('status','ACTIVE')->first();
 
