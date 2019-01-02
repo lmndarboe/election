@@ -2,13 +2,17 @@
 
 @section('content')
 
-    
+   
 
-    <h2 class="page-header">Candidates</h2>
+    <h1 class="page-header">{{ $election->year}}  {{ $election->election_type->name }}</h1>
+
+    <h3>Please Vote for one of the candidates below:</h3>
 
       <div class="row">
 
       	@foreach($candidates as $candidate)
+
+      	 @if($candidate->area->canVoteHere(auth()->user()->voter_card))
         <div class="col-md-4">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2">
@@ -60,6 +64,9 @@
           </div>
           <!-- /.widget-user -->
         </div>
+
+
+        @endif
 
         @endforeach
 

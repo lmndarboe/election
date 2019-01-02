@@ -72,6 +72,27 @@
                     </div>
                     <!-- /.col-6-->
                 </div>
+
+
+
+
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <div class="form-group{{ $errors->has('parent_id') ? 'has-error' : '' }}">
+                            <label for="type">Parent</label>
+                            {!! Form::select('parent_id',$areas,null,['class' => 'form-control','required']) !!}
+                            @if ($errors->has('type'))
+                            <span>
+                                <strong>{{ $errors->first('parent_id')}}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+
+
+
+                </div>
                 <!-- /row -->
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary pull-right">Save</button>

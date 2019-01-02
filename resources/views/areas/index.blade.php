@@ -42,6 +42,7 @@
                 <tr>
                   <th>Area Name</th>
                   <th>Area Type</th>
+                  <th>Parent</th>
         
                   <th align="right" class="text-right">Actions</th>
                 </tr>
@@ -50,6 +51,7 @@
                 <tr>
                 <td>{{ $area->name }}</td>
                 <td>{{ $area->type }}</td>
+                <td>{{ $area->parent ? $area->parent->name: 'No Parent' }}</td>
     
                   <td class="text-right" align="right">
                   
