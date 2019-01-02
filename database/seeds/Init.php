@@ -18,10 +18,14 @@ class Init extends Seeder
     	$user = new \App\User;
     	$user->group_id = $group->id;;
     	$user->name = 'Super Admin';
-    	$user->email = 'lmndarboe@gmail.com';
-    	$user->password = \Hash::make('123');
+    	$user->email = 'babou2ray19@yahoo.com';
+    	$user->password = \Hash::make('admin');
     	$user->save();
 
 
     }
 }
+
+
+
+
