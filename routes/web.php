@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function (){
 		}
 
 
-		return view('welcome',compact('election'));
+		return view('welcome',compact('election','candidates','start_time','end_time'));
 	});
 
 	Route::get('/voting',function(){
