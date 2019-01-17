@@ -42,10 +42,23 @@ class CandidatesController extends Controller
             'party_id' => 'required',
             'address' => 'required',
         ]);
+
+        $image_path = '';
+        if(request()->hasFile('file')){
+            $file = request()->file('file');
+            $filename = str_random(20).'.'.$file->getClientOriginalExtension();
+            $image_path = 'images/'.$filename;
+            $file->move(public_path().'/images/',$filename);
+
+        }
+
+
+
         Candidate::create([
             'full_name' => $request['full_name'],
             'party_id' => $request['party_id'],
             'address' => $request['address'],
+            'pic' => $image_path,
         ]);
 
         return redirect(route('candidates.index'))->with(
@@ -90,7 +103,20 @@ class CandidatesController extends Controller
             'party_id' => 'required',
             'address' => 'required',
         ]);
-        $candidate->update($request->all());
+        $input = $request->all();
+
+        $image_path = $candidate->pic;
+        if(request()->hasFile('file')){
+            $file = request()->file('file');
+            $filename = str_random(20).'.'.$file->getClientOriginalExtension();
+            $image_path = 'images/'.$filename;
+            $file->move(public_path().'/images/',$filename);
+            $input['pic'] = $image_path;
+
+        }
+       
+
+        $candidate->update($input);
 
         return redirect(route('candidates.index'))->with(
             'status', 'Candidate Updated Successfully'

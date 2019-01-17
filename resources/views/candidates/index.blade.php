@@ -40,6 +40,7 @@
 
               <table class="table table-striped">
                 <tr>
+                  <th>Pic</th>
                   <th>Full Name</th>
                   <th>Party</th>
                   <th>Address</th>
@@ -48,6 +49,10 @@
 
                 @foreach($candidates as $candidate)
                 <tr>
+                <td>
+                <img style="width: 30px;" src="/{{ $candidate->getPic() }}">
+                
+                </td>
                 <td>{{ $candidate->full_name}}</td>
                 <td>{{ $candidate->party->name }}</td>
                 <td>{{ $candidate->address }}</td>

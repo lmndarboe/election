@@ -8,7 +8,7 @@ class Candidate extends Model
 {   
 
     protected $fillable = [
-        'full_name','party_id','address'
+        'full_name','party_id','address','pic'
     ];
 
     public function votings(){
@@ -21,6 +21,14 @@ class Candidate extends Model
 
     public function party(){
     	return $this->belongsTo(Party::class);
+    }
+
+    public function getPic(){
+        if($this->pic == ''){
+            return 'img/default-user-profile.png';
+        }
+
+        return $this->pic;
     }
 
 }
