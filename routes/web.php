@@ -60,26 +60,65 @@ Route::group(['middleware' => 'auth'], function (){
 
 		$election = \App\Election::where('status','ACTIVE')->first();
 
+		
+
+
 		if(! is_null($election)){
+
+			$start_time = $election->date->format('Y-m-d').' '.$election->start_time;
+			$start_time = \Carbon\Carbon::parse($start_time);
+
+			$end_time = $election->date->format('Y-m-d').' '.$election->end_time;
+			$end_time = \Carbon\Carbon::parse($end_time);
+
+
 			$candidates = $election->candidate_registrations;
-			return  view('welcome',compact('candidates','election'));
+			return  view('welcome',compact('candidates','election','start_time','end_time'));
 		}
 
 
-		return view('welcome');
+		return view('welcome',compact('election','candidates','start_time','end_time'));
 	});
 
 	Route::get('/voting',function(){
 
 		if( auth()->user()->isAdmin()) return redirect()->back();
 
-		$election = \App\Election::where('status','ACTIVE')->first();
+		$today = \Carbon\Carbon::now();
+
+
+
+
+
+		$election = \App\Election::where('date',$today->format('Y-m-d'))->where('status','ACTIVE')->first();
+
+		
+		
 
 		if(! is_null($election)){
-			$candidates = $election->candidate_registrations;
-			return  view('voting',compact('candidates','election'));
-		}
+			$start_time = $election->date->format('Y-m-d').' '.$election->start_time;
+			$start_time = \Carbon\Carbon::parse($start_time);
 
+			$end_time = $election->date->format('Y-m-d').' '.$election->end_time;
+			$end_time = \Carbon\Carbon::parse($end_time);
+
+			$candidates = $election->candidate_registrations;
+			return  view('voting',compact('candidates','election','start_time','today','end_time'));
+		}
+		return view('voting',compact('candidates','election','start_time'));
+
+	});
+
+	Route::get('/elections/{id}/start',function($id){
+		$election = \App\Election::find($id);
+
+		if(! is_null($election)){
+			$status = ($election->status == 'ACTIVE') ? 'IN-ACTIVE' : 'ACTIVE';
+			$election->status = $status;
+			$election->save();
+
+			return redirect()->back();
+		}
 	});
 
 	Route::get('voter-home',function(){

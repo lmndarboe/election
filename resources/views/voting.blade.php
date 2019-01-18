@@ -3,23 +3,28 @@
 @section('content')
 
    
+@if(! is_null($election))
 
     <h1 class="page-header">{{ $election->year}}  {{ $election->election_type->name }}</h1>
 
+    <h1 class="page-header">The Election starts: {{ $start_time->diffForHumans() }}, From: {{ $election->start_time }} To: {{ $election->end_time }} </h1>
+
+
+    @if($today->gt($start_time) and $today->lt($end_time))
     <h3>Please Vote for one of the candidates below:</h3>
 
       <div class="row">
 
       	@foreach($candidates as $candidate)
 
-      	 @if($candidate->area->canVoteHere(auth()->user()->voter_card))
+      	@if($candidate->area->canVoteHere(auth()->user()->voter_card))
         <div class="col-md-4">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header " style=" background-color: {{$candidate->candidate->party->flag_color}} !important;color: white;">
               <div class="widget-user-image">
-                <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+                <img class="img-circle" src="/{{ $candidate->candidate->getPic()}}" alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
               <h3 class="widget-user-username">{{ $candidate->candidate->full_name }}</h3>
@@ -73,10 +78,14 @@
 
         </div>
 
+      @endif
 
 
+@else
 
+<h1>No Election at this time</h1>
 
+@endif
 
 @stop
 

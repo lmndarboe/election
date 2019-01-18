@@ -29,7 +29,7 @@
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body">
-                  <form action="{{route('candidates.update',$candidate)}}" method="POST">
+                  <form action="{{route('candidates.update',$candidate)}}" method="POST" enctype="multipart/form-data">
                          {{ csrf_field()}}
                          <input name="_method" type="hidden" value="PATCH">
                          <div class="row">
@@ -79,6 +79,29 @@
                             </div>
                             <!-- /col 6 -->
                          </div>
+
+
+
+                         <div class="row">
+
+          <div class="col-md-12">
+
+
+            <div class="form-group{{ $errors->has('file') ? 'has-error' : '' }}">
+              <label for="">Upload Picture</label>
+              <input class="form-control " name="file" type="file" id="file" value="{{ old('file') }}" required>
+              @if ($errors->has('file'))
+              <strong class="text-danger">{{ $errors->first('file') }}</strong>
+              @endif
+            </div>
+
+
+          </div>
+          <!-- /row -->
+        </div>
+
+
+
                          <!-- /row -->
                          <div class="box-footer">
                             <button type="submit" class="btn btn-primary pull-right">Update</button>
