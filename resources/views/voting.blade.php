@@ -5,14 +5,14 @@
    
 @if(! is_null($election))
 
-    <h1 class="page-header">{{ $election->year}}  {{ $election->election_type->name }}</h1>
+    <h1 class="page-header">{{ $election->year}}  {{ $election  ->election_type->name }}</h1>
 
     <h1 class="page-header">The Election starts: {{ $start_time->diffForHumans() }}, From: {{ $election->start_time }} To: {{ $election->end_time }} </h1>
 
-
-    @if($today->gt($start_time) and $today->lt($end_time))
+    
+          @if($today > $start_time or $today < $end_time)
     <h3>Please Vote for one of the candidates below:</h3>
-
+ 
       <div class="row">
 
       	@foreach($candidates as $candidate)
@@ -22,13 +22,13 @@
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header " style=" background-color: {{$candidate->candidate->party->flag_color}} !important;color: white;">
+            <div class="widget-user-header " style=" background-color: {{$candidate->candidate->party->flag_color}} !important;color: black;">
               <div class="widget-user-image">
                 <img class="img-circle" src="/{{ $candidate->candidate->getPic()}}" alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">{{ $candidate->candidate->full_name }}</h3>
-              <h5 class="widget-user-desc"> {{ $candidate->candidate->party->name }}</h5>
+              <h3 class="widget-user-username"  style="font-weight:bold;">{{ $candidate->candidate->full_name }}</h3>
+              <h5 class="widget-user-desc"  style="font-weight:bold;"> {{ $candidate->candidate->party->name }}</h5>
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">

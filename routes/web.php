@@ -85,11 +85,7 @@ Route::group(['middleware' => 'auth'], function (){
 		if( auth()->user()->isAdmin()) return redirect()->back();
 
 		$today = \Carbon\Carbon::now();
-
-
-
-
-
+		
 		$election = \App\Election::where('date',$today->format('Y-m-d'))->where('status','ACTIVE')->first();
 
 		

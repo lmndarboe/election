@@ -82,15 +82,11 @@
                             </div>
                             <!-- /col 6 -->
 
-                            <div class="col-md-6">
+                            <div class="col-md-6"> 
                                     <div class="form-group{{ $errors->has('flag_color') ? 'has-error' : '' }}">
                                         <label for="type">Party Color</label>
-                                        <select class="form-control select2" name="flag_color" id="flag_color" style="width: 100%;">
-                                            <option>Yellow</option>
-                                            <option>Green</option>
-                                            <option>Purple</option>
-                                            <option>Blue</option>
-                                        </select>
+                                        <input class="form-control" name="flag_color" id="flag_color" style="width: 100%;"     value="{{$party->flag_color}}" />
+                                            
                                         @if ($errors->has('flag_color'))
                                         <span>
                                             <strong>{{ $errors->first('flag_color')}}</strong>

@@ -70,7 +70,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                <img src="/dist/img/user3.JPG" class="user-image" alt="User Image">
+                <img src="/dist/img/online.jpg" class="user-image" alt="User Image">
 
               <!--  <img src="/img/default-user-profile.png" class="user-image" alt="User Image"> -->
 
@@ -130,7 +130,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/dist/img/user3.JPG" class="img-circle" alt="User Image">
+          <img src="/dist/img/iec-logo.png" class="img-circle" alt="User Image">
 
         </div>
         <div class="pull-left info">
