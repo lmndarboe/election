@@ -10,7 +10,7 @@
     <h1 class="page-header">The Election starts: {{ $start_time->diffForHumans() }}, From: {{ $election->start_time }} To: {{ $election->end_time }} </h1>
 
     
-          @if($today > $start_time or $today < $end_time)
+          @if($today > $start_time and $today < $end_time)
     <h3>Please Vote for one of the candidates below:</h3>
  
       <div class="row">
